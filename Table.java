@@ -1,10 +1,11 @@
 import java.util.*;  
 public class Table {
 
-    Hashtable<String,Node> hm;  
+    private Hashtable<String,Node> hm;  
     Table(){
         hm=new Hashtable<String,Node>();
     }
+    public Hashtable<String,Node> getHashtable(){return hm;}
     public void criaTabela(String[] s){
         int i=0;
         while(i<6){
@@ -33,6 +34,7 @@ public class Table {
 
                 System.out.println(item.getKey()+" Parent: Null");
             }
+            
         });
     }
 }

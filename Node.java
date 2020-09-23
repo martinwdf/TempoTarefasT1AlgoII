@@ -36,8 +36,9 @@ public class Node implements Comparable<Node>{
 
     @Override
     public int compareTo(Node o) {
-        if(o.getParent()==null){
-            return -1;
+        //mudar esse if, questao quando tem varios null
+        if(o.getParent()==null && this.getParent()!=null){
+            return 1;
         }
         if(this.getValue()<o.getValue()){
             return -1;
