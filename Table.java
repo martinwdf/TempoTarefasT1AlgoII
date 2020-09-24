@@ -34,30 +34,22 @@ public class Table {
         }
     }
     public void print(){
-        hm.values().stream().sorted(new NodeComparator()).forEachOrdered(
+        hm.values().stream().sorted(new NodeComparatorMinimo()).forEachOrdered(
             item -> {if(item.getParent()!=null){
                 System.out.println(item.getKey()+" Parent:" + item.getParent().getKey());
             }
             else{
-
                 System.out.println(item.getKey()+" Parent: Null");
             }
-            
         });
     }
-    public Node[] getDisponiveis(int qtdProcs){
-        Node[] n = new Node[qtdProcs];
-        Iterator<Node> it =hm.values().stream().sorted(new NodeComparator()).iterator();
-        int i=0;
+    public void setParentsNull(String key){
+        Iterator<Node> it =hm.values().stream().iterator();
         while(it.hasNext()){
-            Node nodo = it.next();
-            if(nodo.isFree()){
-                n[i]= nodo;
-            }
-            if(i>4){
-                break;
+            Node n = it.next();
+            if(n.getParent()==hm.get(key)){
+                n.setParent(null);
             }
         }
-        return n;
     }
 }

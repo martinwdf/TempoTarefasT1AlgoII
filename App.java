@@ -1,28 +1,22 @@
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.Scanner;
 
 public class App {
   public static void main(String[] args) {
+    System.out.println("Por favor escolha qual rotina de escolha usar:\n1 -> Minimo\n2 -> Maximo");
+    Scanner scan = new Scanner(System.in);
+    int rotina = scan.nextInt();
     LerArquivoTeste l = new LerArquivoTeste("p1.txt");
-    Queue<Node> pq = new PriorityQueue<>();
     try {
       Table t = new Table(l.tamanhoArquivo());
       t.criaTabela(l.criarVetor());
-      //pq.addAll(t.getHashtable().values());
-      t.getTamanhoArquivo();
-      //pq.add(new Node("rhkhp_104",null));
-      //pq.add(new Node("rhkhp_99",null));
-      //pq.clear();
-      //pq=pq1;
-      Iterator<Node> it = pq.iterator();
-      while(it.hasNext()){
-        System.out.println(it.next().getKey());
-      }
-      //t.print();
+      Procs p = new Procs(" 4", t);
+      p.setProcs();
+      System.out.println("Tempo do programa: " + p.getTempoTotal());
+      t.print();
     } catch (IOException e1) {
       e1.printStackTrace();
     }
+    scan.close();
     }
 }

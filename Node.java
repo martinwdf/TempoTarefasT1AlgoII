@@ -1,9 +1,8 @@
 
-public class Node implements Comparable<Node>{
+public class Node{
     private String key;
     private int value;
     private Node parent;
-    private boolean livre;
 
     Node(String key, Node parent) {
         this.setKey(key);
@@ -11,51 +10,24 @@ public class Node implements Comparable<Node>{
         this.setValue(Integer.parseInt(key.split("_")[1]));
     }
 
+    //Mostra se o nodo esta livre para ser usado
     public boolean isFree(){
-        if(this.parent==null){
+        if(this.getParent()==null){
             return true;
         }
+        else
         return false;
     }
-    public String getKey() {
-        return key;
-    }
 
-    public void setKey(String key) {
-        this.key = key;
-    }
+    //Getters and Setters
+    public String getKey() {return key;}
+    public void setKey(String key) {this.key = key;}
+    public Node getParent() {return parent;}
+    public void setParent(Node parent) {this.parent = parent;}
+    public int getValue() {return value;}
+    public void setValue(int value) {this.value= value;}
 
-    public Node getParent() {
-        return parent;
-    }
-
-    public void setParent(Node parent) {
-        this.parent = parent;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    @Override
-    public int compareTo(Node o) {
-        //mudar esse if, questao quando tem varios null
-        // if(o.getParent()==null && this.getParent()!=null){
-        //     return 1;
-        // }
-        if(this.getValue()<o.getValue()){
-            return -1;
-        }
-        else if (this.getValue()>o.getValue()){
-            return 1;
-        }
-        else{
-            //fazer comparacao de ordem alfabetica quando ocorrer empate
-        }
-        return 0;
+    public void diminuiValor(int value){
+        this.value-=value;
     }
 }
