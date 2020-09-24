@@ -1,16 +1,24 @@
-import java.util.*;  
+import java.util.*;
+
 public class Table {
 
-    private Hashtable<String,Node> hm;  
-    Table(){
-        hm=new Hashtable<String,Node>();
-    }
-    public Hashtable<String,Node> getHashtable(){return hm;}
-    public void criaTabela(String[] s){
-        int i=0;
-        while(i<6){
+    private int tamanhoArquivo;
+    private Hashtable<String, Node> hm;
 
-            String[] str = s[i].split("->");
+    Table(int tamanhoArquivo) {
+        this.tamanhoArquivo=tamanhoArquivo;
+        hm = new Hashtable<String, Node>();
+    }
+
+    public void getTamanhoArquivo() {hm.get("wh_360").setParent(null);}
+  // public void setTamanhoArquivo(int tamanhoArquivo) {this.tamanhoArquivo = tamanhoArquivo;}
+
+    public Hashtable<String, Node> getHashtable() {return hm;}
+    public void criaTabela(String[] s){
+        int i=1;
+        while(i<tamanhoArquivo-1){
+
+            String[] str = s[i].replaceAll(" ", "").split("->");
             if(!hm.containsKey(str[0])){
                 Node n = new Node(str[0], null);
                 hm.put(n.getKey(), n);
@@ -26,7 +34,7 @@ public class Table {
         }
     }
     public void print(){
-        hm.values().stream().forEachOrdered(
+        hm.values().stream().sorted(new NodeComparator()).forEachOrdered(
             item -> {if(item.getParent()!=null){
                 System.out.println(item.getKey()+" Parent:" + item.getParent().getKey());
             }
@@ -36,5 +44,20 @@ public class Table {
             }
             
         });
+    }
+    public Node[] getDisponiveis(int qtdProcs){
+        Node[] n = new Node[qtdProcs];
+        Iterator<Node> it =hm.values().stream().sorted(new NodeComparator()).iterator();
+        int i=0;
+        while(it.hasNext()){
+            Node nodo = it.next();
+            if(nodo.isFree()){
+                n[i]= nodo;
+            }
+            if(i>4){
+                break;
+            }
+        }
+        return n;
     }
 }

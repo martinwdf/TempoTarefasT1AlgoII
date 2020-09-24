@@ -3,6 +3,7 @@ public class Node implements Comparable<Node>{
     private String key;
     private int value;
     private Node parent;
+    private boolean livre;
 
     Node(String key, Node parent) {
         this.setKey(key);
@@ -10,6 +11,12 @@ public class Node implements Comparable<Node>{
         this.setValue(Integer.parseInt(key.split("_")[1]));
     }
 
+    public boolean isFree(){
+        if(this.parent==null){
+            return true;
+        }
+        return false;
+    }
     public String getKey() {
         return key;
     }
@@ -37,9 +44,9 @@ public class Node implements Comparable<Node>{
     @Override
     public int compareTo(Node o) {
         //mudar esse if, questao quando tem varios null
-        if(o.getParent()==null && this.getParent()!=null){
-            return 1;
-        }
+        // if(o.getParent()==null && this.getParent()!=null){
+        //     return 1;
+        // }
         if(this.getValue()<o.getValue()){
             return -1;
         }
