@@ -10,8 +10,6 @@ public class Table {
         hm = new Hashtable<String, Node>();
     }
 
-    public void getTamanhoArquivo() {hm.get("wh_360").setParent(null);}
-  // public void setTamanhoArquivo(int tamanhoArquivo) {this.tamanhoArquivo = tamanhoArquivo;}
 
     public Hashtable<String, Node> getHashtable() {return hm;}
     public void criaTabela(String[] s){
@@ -34,7 +32,7 @@ public class Table {
         }
     }
     public void print(){
-        hm.values().stream().sorted(new NodeComparatorMinimo()).forEachOrdered(
+        hm.values().stream().sorted(new NodeComparatorMaximo()).forEachOrdered(
             item -> {if(item.getParent()!=null){
                 System.out.println(item.getKey()+" Parent:" + item.getParent().getKey());
             }
