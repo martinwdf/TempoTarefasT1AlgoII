@@ -16,7 +16,7 @@ public class Table {
     public Hashtable<String, Node> getHashtable() {return hm;}
     public void criaTabela(String[] s){
         int i=1;
-        while(i<tamanhoArquivo-1){
+        while(i<tamanhoArquivo){
 
             String[] str = s[i].replaceAll(" ", "").split("->");
             if(!hm.containsKey(str[0])){
