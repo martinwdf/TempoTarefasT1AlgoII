@@ -5,7 +5,7 @@ public class App {
   public static void main(String[] args) {
     System.out.println("Por favor escolha qual rotina de escolha usar:\n1 -> Minimo\n2 -> Maximo");
     Scanner scan = new Scanner(System.in);
-    int rotina = scan.nextInt();
+    //int rotina = scan.nextInt();
     LerArquivoTeste l = new LerArquivoTeste("p1.txt");
     try {
       Table t = new Table(l.tamanhoArquivo());

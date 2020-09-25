@@ -30,11 +30,13 @@ public class Procs {
         //pegar os com maior prioridade dependendo de quantos procs estao disponiveis
         Queue<Node> q1 = new PriorityBlockingQueue<>(qtdProcs, new NodeComparatorMinimo());
         while(!t.getHashtable().isEmpty()){
-            Iterator<Node> itHash =t.getHashtable().values().stream().sorted(new NodeComparatorMinimo()).iterator();
+            
+            Iterator<Node> itHash =t.getHashtable().values().stream().sorted(new NodeComparatorMaximo()).iterator();
             System.out.println("TABELA HASH");
             t.print();
             while(itHash.hasNext() && q1.size()<qtdProcs){
                 Node n= itHash.next();
+                //adicionar condicao para nao remover o node no meio do processo
                 if(n.isFree() && !q1.contains(n)){
                     q1.add(n);
                 }
