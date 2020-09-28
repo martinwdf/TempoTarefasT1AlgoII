@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.PriorityBlockingQueue;
@@ -7,13 +8,15 @@ public class Procs {
     private int qtdProcs;
     private Table t;
     private int tempoTotal;
+    private Comparator<Node> c;
 
     //criar fila de prioridade para calcular o tempo
 
-    Procs(String s, Table t){
+    Procs(String s, Table t, Comparator<Node> c){
         tempoTotal=0;
         this.t=t;
         qtdProcs = Integer.parseInt(s.split(" ")[1]);
+        this.c=c;
     }
 
     public int getTempoTotal(){return tempoTotal;}
@@ -28,23 +31,18 @@ public class Procs {
         //remover o item que ja foi contado da hash table
         //ordenar o hash table novamente
         //pegar os com maior prioridade dependendo de quantos procs estao disponiveis
+        // System.out.println("TABELA HASH");
+        //t.print();
         Queue<Node> q1 = new PriorityBlockingQueue<>(qtdProcs, new NodeComparatorMinimo());
         while(!t.getHashtable().isEmpty()){
             
-            Iterator<Node> itHash =t.getHashtable().values().stream().sorted(new NodeComparatorMaximo()).iterator();
-            System.out.println("TABELA HASH");
-            t.print();
+            Iterator<Node> itHash =t.getHashtable().values().stream().sorted(c).iterator();
             while(itHash.hasNext() && q1.size()<qtdProcs){
                 Node n= itHash.next();
-                //adicionar condicao para nao remover o node no meio do processo
                 if(n.isFree() && !q1.contains(n)){
                     q1.add(n);
                 }
             }
-            //pegar o top sem remover
-            // setar o value de todos na fila 
-            //remover ele do hash map
-            //setar ele para null
             Iterator<Node> itQueue = q1.iterator();
             Node head = q1.peek();
             int value = head.getValue();
@@ -59,5 +57,9 @@ public class Procs {
             head=null;
 
         }
+                    //pegar o top sem remover
+            // setar o value de todos na fila 
+            //remover ele do hash map
+            //setar ele para null
     }
 }

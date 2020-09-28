@@ -4,17 +4,19 @@ public class Table {
 
     private int tamanhoArquivo;
     private Hashtable<String, Node> hm;
+    Comparator<Node> c;
 
-    Table(int tamanhoArquivo) {
+    Table(int tamanhoArquivo, Comparator<Node> c){ 
         this.tamanhoArquivo=tamanhoArquivo;
         hm = new Hashtable<String, Node>();
+        this.c=c;
     }
 
 
     public Hashtable<String, Node> getHashtable() {return hm;}
     public void criaTabela(String[] s){
         int i=1;
-        while(i<tamanhoArquivo){
+        while(i<tamanhoArquivo-1){
 
             String[] str = s[i].replaceAll(" ", "").split("->");
             if(!hm.containsKey(str[0])){
@@ -32,7 +34,7 @@ public class Table {
         }
     }
     public void print(){
-        hm.values().stream().sorted(new NodeComparatorMaximo()).forEachOrdered(
+        hm.values().stream().sorted(c).forEachOrdered(
             item -> {if(item.getParent()!=null){
                 System.out.println(item.getKey()+" Parent:" + item.getParent().getKey());
             }

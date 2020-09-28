@@ -10,7 +10,8 @@ class NodeComparatorMinimo implements Comparator<Node> {
             else if (o1.getValue()>o2.getValue()){
                 return 1;
             }
-            //criar politica de empate (ordem alfabetica
-            return 0;
+            //criar politica de empate (ordem alfabetica)
+              return o1.getNome().compareTo(o2.getNome());
+                
     }
 }

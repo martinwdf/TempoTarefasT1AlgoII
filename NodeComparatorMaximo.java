@@ -10,7 +10,7 @@ class NodeComparatorMaximo implements Comparator<Node> {
             else if (o1.getValue()>o2.getValue()){
                 return -1;
             }
-            //criar politica de empate (ordem alfabetica
-            return 0;
+            //politica de empate (ordem alfabetica)
+            return o2.getNome().compareTo(o1.getNome());
     }
 }
